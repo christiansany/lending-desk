@@ -28,4 +28,5 @@ Do not set ARIA attributes yourself — our design system in `src/ui/` handles t
 
 ## Miscellaneous
 
-`any` is allowed where proper typing would be disproportionate effort.
+- `any` is allowed where proper typing would be disproportionate effort.
+- See additional instructions inside ../AGENTS.md

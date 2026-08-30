@@ -49,7 +49,12 @@ to wire anything up.
 
 The design system in `src/ui/` handles labels and ARIA. Do not set ARIA attributes yourself.
 
+## Important
+
+- ONLY DO THE THINGS ASKED OF YOU.
+- NEVER ask question unless told otherwise.
+- Use existing components as they are and don't alter them.
+
 ## Misc
 
-Only do the things asked of you. NEVER ask question unless told otherwise.
-Use existing components as they are and don't alter them.
+- See additional instructions inside ./.github/copilot-instructions.md
