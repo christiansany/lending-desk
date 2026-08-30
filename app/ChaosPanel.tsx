@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import styles from './ChaosPanel.module.css'
 
 interface ChaosOption {
   value: string
@@ -53,21 +54,21 @@ export function ChaosPanel() {
     <>
       {active.length > 0 && (
         <div
-          className="pointer-events-none fixed inset-0 z-40 border-4 border-fuchsia-500"
+          className={styles.border}
           aria-hidden="true"
         />
       )}
-      <div className="fixed right-4 bottom-4 z-50 w-72 font-sans">
+      <div className={styles.panel}>
         {open && (
-          <div className="mb-2 rounded-lg border border-slate-300 bg-white p-3 shadow-lg">
-            <p className="mb-2 text-xs font-semibold text-slate-500 uppercase">Chaos</p>
-            <ul className="space-y-1">
+          <div className={styles.sheet}>
+            <p className={styles.heading}>Chaos</p>
+            <ul className={styles.options}>
               {options.map((option) => (
                 <li key={option.value}>
-                  <label className="flex items-start gap-2 text-xs text-slate-700">
+                  <label className={styles.option}>
                     <input
                       type="checkbox"
-                      className="mt-0.5"
+                      className={styles.checkbox}
                       checked={active.includes(option.value)}
                       disabled={busy}
                       onChange={() => toggle(option.value)}
@@ -77,10 +78,10 @@ export function ChaosPanel() {
                 </li>
               ))}
             </ul>
-            <div className="mt-3 flex gap-2">
+            <div className={styles.actions}>
               <button
                 type="button"
-                className="rounded border border-slate-300 px-2 py-1 text-xs"
+                className={styles.action}
                 disabled={busy}
                 onClick={() => send({ switches: [] })}
               >
@@ -88,7 +89,7 @@ export function ChaosPanel() {
               </button>
               <button
                 type="button"
-                className="rounded border border-slate-300 px-2 py-1 text-xs"
+                className={styles.action}
                 disabled={busy}
                 onClick={() => send({ reset: true })}
               >
@@ -99,9 +100,7 @@ export function ChaosPanel() {
         )}
         <button
           type="button"
-          className={`w-full rounded-lg px-3 py-2 text-xs font-semibold text-white shadow-lg ${
-            active.length > 0 ? 'bg-fuchsia-600' : 'bg-slate-900'
-          }`}
+          className={`${styles.toggle} ${active.length > 0 ? styles.toggleActive : ''}`}
           onClick={() => setOpen((value) => !value)}
         >
           {active.length > 0 ? `Chaos on (${active.length})` : 'Chaos'}

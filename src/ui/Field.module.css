@@ -1,0 +1,34 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-neutral-text);
+}
+
+.input {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--color-action);
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+}
+
+.error {
+  font-size: 0.75rem;
+  color: var(--color-danger-text);
+}

@@ -1,9 +1,7 @@
 'use client'
 
+import styles from './ErrorState.module.css'
+
 export function ErrorState({ error }: { error: any }) {
-  return (
-    <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-      {String(error)}
-    </div>
-  )
+  return <div className={styles.error}>{String(error)}</div>
 }

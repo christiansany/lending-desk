@@ -7,3 +7,4 @@ build/
 .env*.local
 coverage/
 guide.md
+CLAUDE.md

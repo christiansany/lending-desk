@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from './Button'
+import styles from './Pagination.module.css'
 
 interface PaginationProps {
   page: number
@@ -12,7 +13,7 @@ interface PaginationProps {
 export function Pagination({ page, total, limit, onPageChange }: PaginationProps) {
   const pages = Math.max(1, Math.ceil(total / limit))
   return (
-    <nav className="flex items-center gap-3" aria-label="Pagination">
+    <nav className={styles.pagination} aria-label="Pagination">
       <Button
         type="button"
         variant="secondary"
@@ -21,7 +22,7 @@ export function Pagination({ page, total, limit, onPageChange }: PaginationProps
       >
         Previous
       </Button>
-      <span className="text-sm text-slate-600" aria-live="polite">
+      <span className={styles.status} aria-live="polite">
         Page {page} of {pages}
       </span>
       <Button

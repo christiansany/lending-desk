@@ -1,6 +1,7 @@
 'use client'
 
 import { useId, type SelectHTMLAttributes } from 'react'
+import styles from './Select.module.css'
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string
@@ -11,15 +12,11 @@ export function Select({ label, options, className = '', id, ...rest }: SelectPr
   const generatedId = useId()
   const selectId = id ?? generatedId
   return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={selectId} className="text-sm font-medium text-slate-700">
+    <div className={styles.field}>
+      <label htmlFor={selectId} className={styles.label}>
         {label}
       </label>
-      <select
-        id={selectId}
-        className={`rounded-md border border-slate-300 px-3 py-2 text-sm ${className}`}
-        {...rest}
-      >
+      <select id={selectId} className={`${styles.select} ${className}`} {...rest}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

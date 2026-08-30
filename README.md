@@ -12,24 +12,24 @@ finished API in place. Treat it like an inherited codebase, not a blank page.
 ```bash
 npm install
 npm run dev          # http://localhost:3000
-npm run verify       # setup check — please paste the output into the class chat
+npm run verify       # setup check
 ```
 
 Node 22 or newer.
 
 ## What is where
 
-| Path | Contents |
-|---|---|
-| `app/` | Next.js app router. `app/api/` holds the API — **it is finished, do not change it.** |
-| `server/` | The API's data and logic: fixtures, in-memory store, error injection |
-| `src/ui/` | The design system |
-| `src/lib/` | Data access, logging, formatting |
-| `src/features/` | Your code goes here |
-| `SPEC.md` | **The ticket** — what exists, what is missing |
-| `docs/api.md` | The API, with example payloads |
-| `robustness-sheet.md` | The checklist for the evening |
-| `tests/` | Tests for the API (`npm test`) |
+| Path                  | Contents                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `app/`                | Next.js app router. `app/api/` holds the API — **it is finished, do not change it.** |
+| `server/`             | The API's data and logic: fixtures, in-memory store, error injection                 |
+| `src/ui/`             | The design system                                                                    |
+| `src/lib/`            | Data access, logging, formatting                                                     |
+| `src/features/`       | Your code goes here                                                                  |
+| `SPEC.md`             | **The ticket** — what exists, what is missing                                        |
+| `docs/api.md`         | The API, with example payloads                                                       |
+| `robustness-sheet.md` | The checklist for the evening                                                        |
+| `tests/`              | Tests for the API (`npm test`)                                                       |
 
 ## Notes
 
