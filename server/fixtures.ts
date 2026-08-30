@@ -9,6 +9,27 @@ export const CATEGORIES: { value: Category; label: string }[] = [
   { value: 'misc', label: 'Misc' },
 ]
 
+/**
+ * There is no login in this app. One fixed user stands in for "me", so the
+ * owner filter and the "add your own item" form have something to work with.
+ */
+export const CURRENT_USER = {
+  name: 'Rahel Bosshard',
+  email: 'rahel.bosshard@example.com',
+}
+
+/**
+ * Owners cycle through this list, so every fifth item belongs to the current
+ * user — the `owner=me` filter is never empty on a fresh start.
+ */
+const OWNERS = [
+  CURRENT_USER,
+  { name: 'Timo Widmer', email: 'timo.widmer@example.com' },
+  { name: 'Nadia Keller', email: 'nadia.keller@example.com' },
+  { name: 'Anna Frei', email: 'anna.frei@example.com' },
+  { name: 'Jonas Brunner', email: 'jonas.brunner@example.com' },
+]
+
 const LOCATIONS = ['Shelf A1', 'Shelf A2', 'Shelf B1', 'Shelf B2', 'Cabinet C', 'Storage room']
 const CONDITIONS: Item['condition'][] = ['new', 'good', 'worn']
 
@@ -80,6 +101,8 @@ export function createItems(): Item[] {
     location: LOCATIONS[i % LOCATIONS.length],
     condition: CONDITIONS[i % CONDITIONS.length],
     dailyRate: 5 + ((i * 3) % 40),
+    ownerName: OWNERS[i % OWNERS.length].name,
+    ownerEmail: OWNERS[i % OWNERS.length].email,
   }))
 }
 

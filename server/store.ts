@@ -1,11 +1,10 @@
 import { createItems, createReservations } from './fixtures'
-import type { Item, Report, Reservation } from './types'
+import type { Item, Reservation } from './types'
 import type { ChaosSwitch } from './chaos'
 
 export interface Store {
   items: Item[]
   reservations: Reservation[]
-  reports: Report[]
   chaos: ChaosSwitch[]
   /** Counts every API request. `flaky` uses it to fail every third one. */
   requestCount: number
@@ -16,7 +15,6 @@ function create(): Store {
   return {
     items: createItems(),
     reservations: createReservations(),
-    reports: [],
     chaos: [],
     requestCount: 0,
     nextId: 100,

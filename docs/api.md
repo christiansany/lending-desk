@@ -12,12 +12,18 @@ Responses take 120–400 ms. Search takes longer the more hits it produces.
 
 | Parameter | Type | Default | Notes |
 |---|---|---|---|
-| `q` | string | `''` | substring match on name, description, serial |
+| `q` | string | `''` | fuzzy match, see below |
 | `category` | string | — | one of `laptops`, `cameras`, `audio`, `tools`, `vr`, `misc` |
+| `status` | string | `all` | `all`, `free` or `reserved` |
+| `owner` | string | `all` | `all`, `me` or `others` |
 | `page` | integer ≥ 1 | `1` | |
 | `limit` | integer 1–50 | `12` | |
 
-There are 47 items in total.
+There are 47 items in total. All filters combine.
+
+`q` matches a substring in name, description, serial or owner name — and, failing that, the
+letters of the query in order in the name, so `mcbk` finds `MacBook Pro 14"`. With a `q` the
+result is sorted by match quality, otherwise by id.
 
 ```jsonc
 // 200
@@ -31,7 +37,12 @@ There are 47 items in total.
       "serial": "LD-1000",
       "location": "Shelf A1",
       "condition": "new",
-      "dailyRate": 5
+      "dailyRate": 5,
+      "ownerName": "Rahel Bosshard",
+      "ownerEmail": "rahel.bosshard@example.com",
+      "reserved": true,
+      "takenUntil": "2026-09-06",
+      "mine": true
     }
   ],
   "total": 47,
@@ -40,11 +51,43 @@ There are 47 items in total.
 }
 ```
 
-A malformed `page`, `limit` or `category` gives a **400**.
+`reserved` is true while a reservation is running or still ahead; `takenUntil` is its last day,
+or `null`. `mine` is true when the item belongs to the current user.
+
+A malformed `page`, `limit`, `category`, `status` or `owner` gives a **400**.
+
+## `POST /api/items`
+
+Adds an item to lend out. The owner is always the current user — it is not read from the body.
+
+```jsonc
+// request
+{
+  "name": "Nintendo Switch 2",
+  "category": "misc",
+  "description": "Docked and handheld, two joycon pairs.",
+  "location": "Shelf B2",
+  "condition": "good",        // "new" | "good" | "worn"
+  "dailyRate": 8
+}
+// 201 — the created item, in the same shape as in the list
+```
+
+Rules: name at least 2 characters · a known category · description at least 10 characters ·
+a location · a valid condition · `dailyRate` a number ≥ 0. Answers **201**, otherwise **422**.
 
 ## `GET /api/items/:id`
 
-Returns a single item, or a **404** if the id does not exist.
+Returns a single item in the same shape as in the list, or a **404** if the id does not exist.
+
+## `GET /api/me`
+
+```jsonc
+// 200
+{ "name": "Rahel Bosshard", "email": "rahel.bosshard@example.com" }
+```
+
+There is no login. This is who "me" is, for the owner filter and for prefilling forms.
 
 ## `GET /api/items/:id/availability?from=YYYY-MM-DD&to=YYYY-MM-DD`
 
@@ -91,22 +134,6 @@ Missing or malformed dates give a **400**, an unknown item a **404**.
 
 Rules: name at least 2 characters · a reachable email address · `from` not in the past · `to` not
 before `from` · at most 14 days including both ends · purpose at least 5 characters.
-
-## `GET /api/reports?itemId=item-001` · `POST /api/reports`
-
-```jsonc
-// request
-{
-  "itemId": "item-001",
-  "reporter": "Timo Widmer",
-  "email": "timo.widmer@example.com",
-  "severity": "limited",          // "cosmetic" | "limited" | "unusable"
-  "description": "The left hinge is loose, the display wobbles."
-}
-```
-
-Rules: reporter at least 2 characters · a reachable email address · a valid severity ·
-description at least 10 characters. Answers **201**, otherwise **422**.
 
 ## `POST /api/logs`
 

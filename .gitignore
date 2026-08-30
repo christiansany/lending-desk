@@ -6,3 +6,4 @@ build/
 *.tsbuildinfo
 .env*.local
 coverage/
+guide.md

@@ -1,9 +1,11 @@
 # Lending Desk
 
-Internal application for lending out equipment: items, reservations, damage reports.
+Internal application for lending out equipment: items and reservations.
 
-This is a **brownfield project**. There is a design system, a data-fetching hook and a logger in
-place. Treat it like an inherited codebase, not a blank page.
+This is a **brownfield project**. There is a design system, a data-fetching hook, a logger and a
+finished API in place. Treat it like an inherited codebase, not a blank page.
+
+**What to build is in `SPEC.md`.**
 
 ## Getting started
 
@@ -24,15 +26,18 @@ Node 22 or newer.
 | `src/ui/` | The design system |
 | `src/lib/` | Data access, logging, formatting |
 | `src/features/` | Your code goes here |
-| `briefs/` | The two tickets |
+| `SPEC.md` | **The ticket** — what exists, what is missing |
 | `docs/api.md` | The API, with example payloads |
 | `robustness-sheet.md` | The checklist for the evening |
 | `tests/` | Tests for the API (`npm test`) |
 
 ## Notes
 
-- The data lives **in memory**. It is gone when the server restarts. The Chaos Panel has a
+- The data lives **in memory** and is seeded on every server start: 47 items, five owners, three
+  reservations. Whatever you add is gone when the server restarts. The Chaos Panel has a
   "Reset data" button.
+- There is no login. `GET /api/me` says who "you" are — that is what the owner filter compares
+  against.
 - Every response carries an `x-request-id`, errors included. It also appears in the server log.
 - The **Chaos Panel** (bottom right, dev only) injects errors into the API: slow, flaky, 500, empty,
   409, 429, timeout, garbage. While a switch is on, the page has a magenta border.

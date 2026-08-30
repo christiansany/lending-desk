@@ -35,9 +35,9 @@ export type Endpoint =
   | 'item'
   | 'availability'
   | 'reservations'
-  | 'reports'
   | 'logs'
   | 'chaos'
+  | 'me'
 
 export interface ChaosInput {
   switches: readonly ChaosSwitch[]

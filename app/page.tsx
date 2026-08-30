@@ -13,19 +13,13 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <section>
         <Card>
-          <h2 className="mb-1 text-base font-semibold">Brief A — Item list and reservation</h2>
+          <h2 className="mb-1 text-base font-semibold">What to build</h2>
           <p className="text-sm text-slate-600">
-            Search, filter, detail view, reservation form. See{' '}
-            <code className="rounded bg-slate-200 px-1">briefs/A-item-list-and-reservation.md</code>.
-          </p>
-        </Card>
-        <Card>
-          <h2 className="mb-1 text-base font-semibold">Brief B — Damage report</h2>
-          <p className="text-sm text-slate-600">
-            Report damage on an item, list existing reports. See{' '}
-            <code className="rounded bg-slate-200 px-1">briefs/B-damage-report.md</code>.
+            The list, the filters, the two forms and the states are described in{' '}
+            <code className="rounded bg-slate-200 px-1">SPEC.md</code>. The API behind them is in{' '}
+            <code className="rounded bg-slate-200 px-1">docs/api.md</code>.
           </p>
         </Card>
       </section>
@@ -33,6 +27,10 @@ export default function HomePage() {
       <section className="space-y-2">
         <h2 className="text-base font-semibold">Where things are</h2>
         <ul className="list-disc space-y-1 pl-5 text-sm text-slate-600">
+          <li>
+            <code className="rounded bg-slate-200 px-1">SPEC.md</code> — what exists and what is
+            missing
+          </li>
           <li>
             <code className="rounded bg-slate-200 px-1">docs/api.md</code> — the API, with example
             payloads
