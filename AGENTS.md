@@ -16,7 +16,7 @@ Node 22 or newer.
 ## Where things go
 
 - Feature code: `src/features/`
-- Routes: `app/items/`
+- Routes: `app/` — the root page is the items list; add further routes alongside it
 - Design system: `src/ui/` — always use it, never hand-roll a button or an input.
 - **Do not touch `app/api/` or `server/`.** The API is finished.
 
