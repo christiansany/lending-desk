@@ -15,7 +15,7 @@ data-fetching libraries.
 - Form state with `useState`, one state per field. No form or validation libraries.
   (`react-hook-form` and `zod` are still in package.json but are legacy and no longer used.)
 - Validation directly in the submit function.
-- Submitting happens via `onClick` on the submit button. We do not use `onSubmit` on the `<form>`;
+- Submitting happens via `onClick` on the submit button. We DO NOT use `onSubmit` on the `<form>`;
   that caused unwanted reloads in the past.
 
 ## Errors
@@ -29,4 +29,3 @@ Do not set ARIA attributes yourself — our design system in `src/ui/` handles t
 ## Miscellaneous
 
 - `any` is allowed where proper typing would be disproportionate effort.
-- See additional instructions inside ../AGENTS.md

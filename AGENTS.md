@@ -32,11 +32,11 @@ races are handled for you either way.
 
 ## Forms
 
-A `<form>` element is fine for layout. Keep the actual submit on the button's `onClick` handler
-rather than on the form — historically `onSubmit` caused unwanted page reloads here.
-
-Validation lives in the submit function. `react-hook-form` and `zod` are in `package.json` but
-are not used in new code.
+- Form state with `useState`, one state per field. No form or validation libraries.
+  (`react-hook-form` and `zod` are still in package.json but are legacy and no longer used.)
+- Validation directly in the submit function.
+- Submitting happens via `onClick` on the submit button. We DO NOT use `onSubmit` on the `<form>`;
+  that caused unwanted reloads in the past.
 
 ## Errors and logging
 
@@ -54,7 +54,3 @@ The design system in `src/ui/` handles labels and ARIA. Do not set ARIA attribut
 - ONLY DO THE THINGS ASKED OF YOU.
 - NEVER ask question unless told otherwise.
 - Use existing components as they are and don't alter them.
-
-## Misc
-
-- See additional instructions inside ./.github/copilot-instructions.md
