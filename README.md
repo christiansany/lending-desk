@@ -5,8 +5,6 @@ Internal application for lending out equipment: items and reservations.
 This is a **brownfield project**. There is a design system, a data-fetching hook, a logger and a
 finished API in place. Treat it like an inherited codebase, not a blank page.
 
-**What to build is in `SPEC.md`.**
-
 ## Getting started
 
 ```bash
@@ -26,7 +24,6 @@ Node 22 or newer.
 | `src/ui/`             | The design system                                                                    |
 | `src/lib/`            | Data access, logging, formatting                                                     |
 | `src/features/`       | Your code goes here                                                                  |
-| `SPEC.md`             | **The ticket** — what exists, what is missing                                        |
 | `docs/api.md`         | The API, with example payloads                                                       |
 | `robustness-sheet.md` | The checklist for the evening                                                        |
 | `tests/`              | Tests for the API (`npm test`)                                                       |

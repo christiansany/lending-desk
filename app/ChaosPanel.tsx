@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { useCallback, useEffect, useState } from 'react'
-import styles from './ChaosPanel.module.css'
+import { useCallback, useEffect, useState } from "react";
+import styles from "./ChaosPanel.module.css";
 
 interface ChaosOption {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 /**
@@ -14,50 +14,47 @@ interface ChaosOption {
  * suite drive the same switches.
  */
 export function ChaosPanel() {
-  const [open, setOpen] = useState(false)
-  const [options, setOptions] = useState<ChaosOption[]>([])
-  const [active, setActive] = useState<string[]>([])
-  const [busy, setBusy] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState<ChaosOption[]>([]);
+  const [active, setActive] = useState<string[]>([]);
+  const [busy, setBusy] = useState(false);
 
   const load = useCallback(async () => {
-    const res = await fetch('/api/dev/chaos', { cache: 'no-store' })
-    const json = await res.json()
-    setOptions(json.available ?? [])
-    setActive(json.switches ?? [])
-  }, [])
+    const res = await fetch("/api/dev/chaos", { cache: "no-store" });
+    const json = await res.json();
+    setOptions(json.available ?? []);
+    setActive(json.switches ?? []);
+  }, []);
 
   useEffect(() => {
-    void load()
-  }, [load])
+    void load();
+  }, [load]);
 
-  if (process.env.NODE_ENV === 'production') return null
+  if (process.env.NODE_ENV === "production") return null;
 
   async function send(body: unknown) {
-    setBusy(true)
+    setBusy(true);
     try {
-      const res = await fetch('/api/dev/chaos', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
+      const res = await fetch("/api/dev/chaos", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(body),
-      })
-      const json = await res.json()
-      setActive(json.switches ?? [])
+      });
+      const json = await res.json();
+      setActive(json.switches ?? []);
     } finally {
-      setBusy(false)
+      setBusy(false);
     }
   }
 
   const toggle = (value: string) =>
-    send({ switches: active.includes(value) ? active.filter((s) => s !== value) : [...active, value] })
+    send({
+      switches: active.includes(value) ? active.filter((s) => s !== value) : [...active, value],
+    });
 
   return (
     <>
-      {active.length > 0 && (
-        <div
-          className={styles.border}
-          aria-hidden="true"
-        />
-      )}
+      {active.length > 0 && <div className={styles.border} aria-hidden="true" />}
       <div className={styles.panel}>
         {open && (
           <div className={styles.sheet}>
@@ -100,12 +97,12 @@ export function ChaosPanel() {
         )}
         <button
           type="button"
-          className={`${styles.toggle} ${active.length > 0 ? styles.toggleActive : ''}`}
+          className={`${styles.toggle} ${active.length > 0 ? styles.toggleActive : ""}`}
           onClick={() => setOpen((value) => !value)}
         >
-          {active.length > 0 ? `Chaos on (${active.length})` : 'Chaos'}
+          {active.length > 0 ? `Chaos on (${active.length})` : "Chaos"}
         </button>
       </div>
     </>
-  )
+  );
 }

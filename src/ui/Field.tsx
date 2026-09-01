@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import type { InputHTMLAttributes } from 'react'
-import styles from './Field.module.css'
+import type { InputHTMLAttributes } from "react";
+import styles from "./Field.module.css";
 
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string
-  error?: string
-  hint?: string
+  label: string;
+  error?: string;
+  hint?: string;
 }
 
-export function Field({ label, error, hint, className = '', ...rest }: FieldProps) {
+export function Field({ label, error, hint, className = "", ...rest }: FieldProps) {
   return (
     <div className={styles.field}>
       <label htmlFor="field" className={styles.label}>
@@ -19,5 +19,5 @@ export function Field({ label, error, hint, className = '', ...rest }: FieldProp
       {hint && <small className={styles.hint}>{hint}</small>}
       {error && <small className={styles.error}>{error}</small>}
     </div>
-  )
+  );
 }

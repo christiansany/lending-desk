@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { Card } from '@/src/ui'
-import styles from './page.module.css'
+import { Card } from "@/src/ui";
+import styles from "./page.module.css";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
       <section className={styles.section}>
         <h1 className={styles.title}>Lending Desk</h1>
         <p className={styles.lead}>
-          Internal application for lending out equipment. The API is finished and lives under{' '}
+          Internal application for lending out equipment. The API is finished and lives under{" "}
           <code>/api</code>. The screens are not.
         </p>
       </section>
@@ -18,8 +18,8 @@ export default function HomePage() {
         <Card>
           <h2 className={styles.subtitle}>What to build</h2>
           <p className={styles.body}>
-            The list, the filters, the two forms and the states are described in <code>SPEC.md</code>
-            . The API behind them is in <code>docs/api.md</code>.
+            The list, the filters, the two forms and the states. The API behind them is in{" "}
+            <code>docs/api.md</code>.
           </p>
         </Card>
       </section>
@@ -27,9 +27,6 @@ export default function HomePage() {
       <section className={styles.section}>
         <h2 className={styles.subtitle}>Where things are</h2>
         <ul className={styles.list}>
-          <li>
-            <code>SPEC.md</code> — what exists and what is missing
-          </li>
           <li>
             <code>docs/api.md</code> — the API, with example payloads
           </li>
@@ -48,5 +45,5 @@ export default function HomePage() {
         </ul>
       </section>
     </div>
-  )
+  );
 }

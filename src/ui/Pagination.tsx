@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { Button } from './Button'
-import styles from './Pagination.module.css'
+import { Button } from "./Button";
+import styles from "./Pagination.module.css";
 
 interface PaginationProps {
-  page: number
-  total: number
-  limit: number
-  onPageChange: (page: number) => void
+  page: number;
+  total: number;
+  limit: number;
+  onPageChange: (page: number) => void;
 }
 
 export function Pagination({ page, total, limit, onPageChange }: PaginationProps) {
-  const pages = Math.max(1, Math.ceil(total / limit))
+  const pages = Math.max(1, Math.ceil(total / limit));
   return (
     <nav className={styles.pagination} aria-label="Pagination">
       <Button
@@ -34,5 +34,5 @@ export function Pagination({ page, total, limit, onPageChange }: PaginationProps
         Next
       </Button>
     </nav>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import next from 'eslint-config-next'
+import next from "eslint-config-next";
 
 const config = [
   ...next,
@@ -6,10 +6,10 @@ const config = [
     rules: {
       // Our data hook predates this rule. Turned off so the build stays green;
       // we will look at it when we get to it.
-      'react-hooks/set-state-in-effect': 'off',
+      "react-hooks/set-state-in-effect": "off",
     },
   },
-  { ignores: ['.next/**', 'node_modules/**'] },
-]
+  { ignores: [".next/**", "node_modules/**"] },
+];
 
-export default config
+export default config;

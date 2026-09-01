@@ -2,16 +2,16 @@
  * 120-400 ms of normal latency. Enough that a missing loading state becomes
  * visible, little enough not to be annoying. Switched off in the test suite.
  */
-const OFF = process.env.LENDING_DESK_LATENCY === 'off' || process.env.NODE_ENV === 'test'
+const OFF = process.env.LENDING_DESK_LATENCY === "off" || process.env.NODE_ENV === "test";
 
 export function sleep(ms: number): Promise<void> {
-  if (ms <= 0) return Promise.resolve()
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  if (ms <= 0) return Promise.resolve();
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export function baseLatencyMs(): number {
-  if (OFF) return 0
-  return 120 + Math.floor(Math.random() * 281)
+  if (OFF) return 0;
+  return 120 + Math.floor(Math.random() * 281);
 }
 
 /**
@@ -21,6 +21,6 @@ export function baseLatencyMs(): number {
  * No chaos switch needed for the race condition.
  */
 export function searchLatencyMs(matchCount: number): number {
-  if (OFF) return 0
-  return Math.min(matchCount * 6, 300)
+  if (OFF) return 0;
+  return Math.min(matchCount * 6, 300);
 }

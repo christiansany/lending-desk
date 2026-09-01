@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import './globals.css'
-import Link from 'next/link'
-import type { ReactNode } from 'react'
-import { ChaosPanel } from './ChaosPanel'
-import styles from './layout.module.css'
+import "./globals.css";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { ChaosPanel } from "./ChaosPanel";
+import styles from "./layout.module.css";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -23,5 +23,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ChaosPanel />
       </body>
     </html>
-  )
+  );
 }

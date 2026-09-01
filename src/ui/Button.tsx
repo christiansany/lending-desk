@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import { Spinner } from './Spinner'
-import styles from './Button.module.css'
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { Spinner } from "./Spinner";
+import styles from "./Button.module.css";
 
-type Variant = 'primary' | 'secondary' | 'ghost'
+type Variant = "primary" | "secondary" | "ghost";
 
 const STYLES: Record<Variant, string> = {
   primary: styles.primary,
   secondary: styles.secondary,
   ghost: styles.ghost,
-}
+};
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant
-  loading?: boolean
-  children: ReactNode
+  variant?: Variant;
+  loading?: boolean;
+  children: ReactNode;
 }
 
 export function Button({
-  variant = 'primary',
+  variant = "primary",
   loading = false,
-  className = '',
+  className = "",
   children,
   ...rest
 }: ButtonProps) {
@@ -30,5 +30,5 @@ export function Button({
       {loading && <Spinner />}
       {children}
     </button>
-  )
+  );
 }

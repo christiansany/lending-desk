@@ -10,14 +10,14 @@ Responses take 120–400 ms. Search takes longer the more hits it produces.
 
 ## `GET /api/items`
 
-| Parameter | Type | Default | Notes |
-|---|---|---|---|
-| `q` | string | `''` | fuzzy match, see below |
-| `category` | string | — | one of `laptops`, `cameras`, `audio`, `tools`, `vr`, `misc` |
-| `status` | string | `all` | `all`, `free` or `reserved` |
-| `owner` | string | `all` | `all`, `me` or `others` |
-| `page` | integer ≥ 1 | `1` | |
-| `limit` | integer 1–50 | `12` | |
+| Parameter  | Type         | Default | Notes                                                       |
+| ---------- | ------------ | ------- | ----------------------------------------------------------- |
+| `q`        | string       | `''`    | fuzzy match, see below                                      |
+| `category` | string       | —       | one of `laptops`, `cameras`, `audio`, `tools`, `vr`, `misc` |
+| `status`   | string       | `all`   | `all`, `free` or `reserved`                                 |
+| `owner`    | string       | `all`   | `all`, `me` or `others`                                     |
+| `page`     | integer ≥ 1  | `1`     |                                                             |
+| `limit`    | integer 1–50 | `12`    |                                                             |
 
 There are 47 items in total. All filters combine.
 
@@ -42,12 +42,12 @@ result is sorted by match quality, otherwise by id.
       "ownerEmail": "rahel.bosshard@example.com",
       "reserved": true,
       "takenUntil": "2026-09-06",
-      "mine": true
-    }
+      "mine": true,
+    },
   ],
   "total": 47,
   "page": 1,
-  "limit": 12
+  "limit": 12,
 }
 ```
 
@@ -67,8 +67,8 @@ Adds an item to lend out. The owner is always the current user — it is not rea
   "category": "misc",
   "description": "Docked and handheld, two joycon pairs.",
   "location": "Shelf B2",
-  "condition": "good",        // "new" | "good" | "worn"
-  "dailyRate": 8
+  "condition": "good", // "new" | "good" | "worn"
+  "dailyRate": 8,
 }
 // 201 — the created item, in the same shape as in the list
 ```
@@ -104,7 +104,7 @@ Missing or malformed dates give a **400**, an unknown item a **404**.
 
 ```jsonc
 // 200
-{ "reservations": [ /* … */ ], "total": 3 }
+{ "reservations": [/* … */], "total": 3 }
 ```
 
 ## `POST /api/reservations`
@@ -167,19 +167,19 @@ Errors follow RFC 9457 with `Content-Type: application/problem+json`.
   "requestId": "8f3c-4a1b-9d2e0f77",
   "errors": {
     "email": "This address is not reachable",
-    "to": "Maximum 14 days"
-  }
+    "to": "Maximum 14 days",
+  },
 }
 ```
 
-| Status | When | Body |
-|---|---|---|
-| 400 | malformed query parameters or body | `detail` |
-| 404 | unknown item | `detail` |
-| 409 | the period is already taken | `detail`, `takenUntil` |
-| 422 | validation failed | `errors` — a field → message map |
-| 429 | rate limit | `detail`, header `Retry-After: 5` |
-| 500 | server error | `detail` |
-| 503 | temporarily unavailable | `detail` |
+| Status | When                               | Body                              |
+| ------ | ---------------------------------- | --------------------------------- |
+| 400    | malformed query parameters or body | `detail`                          |
+| 404    | unknown item                       | `detail`                          |
+| 409    | the period is already taken        | `detail`, `takenUntil`            |
+| 422    | validation failed                  | `errors` — a field → message map  |
+| 429    | rate limit                         | `detail`, header `Retry-After: 5` |
+| 500    | server error                       | `detail`                          |
+| 503    | temporarily unavailable            | `detail`                          |
 
 The keys in `errors` are the field names from the request body.

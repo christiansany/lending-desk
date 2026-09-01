@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { useId, type SelectHTMLAttributes } from 'react'
-import styles from './Select.module.css'
+import { useId, type SelectHTMLAttributes } from "react";
+import styles from "./Select.module.css";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  label: string
-  options: { value: string; label: string }[]
+  label: string;
+  options: { value: string; label: string }[];
 }
 
-export function Select({ label, options, className = '', id, ...rest }: SelectProps) {
-  const generatedId = useId()
-  const selectId = id ?? generatedId
+export function Select({ label, options, className = "", id, ...rest }: SelectProps) {
+  const generatedId = useId();
+  const selectId = id ?? generatedId;
   return (
     <div className={styles.field}>
       <label htmlFor={selectId} className={styles.label}>
@@ -24,5 +24,5 @@ export function Select({ label, options, className = '', id, ...rest }: SelectPr
         ))}
       </select>
     </div>
-  )
+  );
 }

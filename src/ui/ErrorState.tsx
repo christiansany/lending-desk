@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import styles from './ErrorState.module.css'
+import styles from "./ErrorState.module.css";
 
 export function ErrorState({ error }: { error: any }) {
-  return <div className={styles.error}>{String(error)}</div>
+  return <div className={styles.error}>{String(error)}</div>;
 }
