@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "matcher": "Bash",
+        "bash": "node .github/hooks/block-destructive-commands.mjs",
+        "timeoutSec": 2
+      }
+    ]
+  }
+}
