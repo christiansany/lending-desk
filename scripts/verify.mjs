@@ -7,13 +7,20 @@
  */
 import { spawn } from "node:child_process";
 import { createConnection, createServer } from "node:net";
-import { existsSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PROBE_PORT = 3123;
-const MIN_NODE_MAJOR = 22;
+const MIN_NODE_MAJOR = 24;
+
+// Importing the .ts fixtures relies on Node's type stripping, which warns about
+// the typeless package.json. Keep that noise out of the paste-able output.
+process.removeAllListeners("warning");
+process.on("warning", (warning) => {
+  if (warning.code !== "MODULE_TYPELESS_PACKAGE_JSON") console.warn(warning);
+});
 
 const results = [];
 let failed = false;
@@ -70,11 +77,10 @@ record(installed, "npm install", installed ? "ok" : "missing — run `npm instal
 
 // 3 — the seed
 try {
-  const fixtures = readFileSync(join(ROOT, "server", "fixtures.ts"), "utf8");
-  const count = (fixtures.match(/^ {2}\['/gm) ?? []).length;
-  record(count === 47, "seed", `${count} items`);
-} catch {
-  record(false, "seed", "server/fixtures.ts not readable");
+  const { ITEM_COUNT } = await import(pathToFileURL(join(ROOT, "server", "fixtures.ts")).href);
+  record(ITEM_COUNT === 47, "seed", `${ITEM_COUNT} items`);
+} catch (error) {
+  record(false, "seed", `server/fixtures.ts not importable — ${error.message}`);
 }
 
 // 4 — port 3000
@@ -122,16 +128,8 @@ if (installed) {
 // 6 — the test suite
 record(existsSync(join(ROOT, "node_modules", ".bin", "vitest")), "npm test", "vitest installed");
 
-// 7 — Copilot
-record(null, "Copilot", 'cannot be checked from here — open the chat and send "hello"');
-
-console.log("");
 for (const result of results) console.log(line(result));
 console.log("");
-console.log(
-  failed
-    ? "❌ Something is missing — please post this output."
-    : "✅ Ready. Please post this output.",
-);
+console.log(failed ? "❌ Something is missing" : "✅ Ready");
 
 process.exit(failed ? 1 : 0);

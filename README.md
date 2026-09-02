@@ -13,7 +13,7 @@ npm run dev          # http://localhost:3000
 npm run verify       # setup check
 ```
 
-Node 22 or newer.
+Node 24 or newer.
 
 ## What is where
 
@@ -25,7 +25,6 @@ Node 22 or newer.
 | `src/lib/`            | Data access, logging, formatting                                                     |
 | `src/features/`       | Your code goes here                                                                  |
 | `docs/api.md`         | The API, with example payloads                                                       |
-| `robustness-sheet.md` | The checklist for the evening                                                        |
 | `tests/`              | Tests for the API (`npm test`)                                                       |
 
 ## Notes

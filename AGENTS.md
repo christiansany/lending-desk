@@ -11,7 +11,7 @@ npm run lint
 npm run typecheck
 ```
 
-Node 22 or newer.
+Node 24 or newer.
 
 ## Where things go
 
