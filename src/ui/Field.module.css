@@ -21,6 +21,16 @@
 
 .input:focus {
   border-color: var(--color-action);
+  box-shadow: 0 0 0 2px var(--color-neutral-bg);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--color-danger-text);
+}
+
+.textarea {
+  min-height: 6rem;
+  resize: vertical;
 }
 
 .hint {

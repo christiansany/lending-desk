@@ -18,3 +18,26 @@
   font-size: 0.875rem;
   background-color: var(--color-surface);
 }
+
+.select:focus {
+  border-color: var(--color-action);
+  box-shadow: 0 0 0 2px var(--color-neutral-bg);
+  outline: none;
+}
+
+.select[aria-invalid="true"] {
+  border-color: var(--color-danger-text);
+}
+
+.hint,
+.error {
+  font-size: 0.75rem;
+}
+
+.hint {
+  color: var(--color-text-subtle);
+}
+
+.error {
+  color: var(--color-danger-text);
+}
