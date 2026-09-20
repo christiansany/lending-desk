@@ -26,7 +26,9 @@ Reveal one hint at a time.
 1. The starting branch already moves item reads into the route. Add state files,
    not another data layer.
 2. Next.js discovers `loading.tsx`, `not-found.tsx`, and `error.tsx` by location.
-3. Keep retry in `error.tsx`; keep a return path in `not-found.tsx`.
+3. In `error.tsx`, call both `reset()` and `router.refresh()` so retry clears
+   the boundary and requests a fresh server render. Keep a return path in
+   `not-found.tsx`.
 
 ## Exercise 5
 
