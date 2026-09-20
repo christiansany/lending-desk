@@ -11,6 +11,7 @@
     "clean": "node scripts/clean.mjs",
     "start": "next start",
     "lint": "eslint .",
+    "measure:stream": "node scripts/measure-stream.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
