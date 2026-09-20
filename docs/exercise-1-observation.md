@@ -42,6 +42,8 @@ another pair can verify it.
 
 Use the browser's literal **View Source** command. The Elements panel shows the
 DOM after JavaScript changed it, so it cannot answer the first question.
+Use the document row's **Transferred** value for HTML size. Sum **Transferred**
+for JavaScript rows that finish before the first item appears.
 
 ## Part 2: reconstruct the request
 
@@ -49,12 +51,13 @@ Reload once more with the Network log cleared. Put the measured times above the
 events. The exact values will differ between machines. The order matters.
 
 ```text
-navigation     HTML arrives     JavaScript runs     API ends     first item appears
-    0 ms            ___ ms             ___ ms          ___ ms            ___ ms
+navigation     HTML arrives     items API starts     API ends     first item appears
+    0 ms            ___ ms              ___ ms          ___ ms            ___ ms
 ```
 
-Use the request waterfall and Initiator column when two events look as if they
-happened at the same time.
+Use the request waterfall and Initiator column. The start of the script-initiated
+`/api/items` request is the observable sign that the application started its
+data work; do not guess an invisible "JavaScript runs" timestamp.
 
 ## Part 3: interpret it
 
