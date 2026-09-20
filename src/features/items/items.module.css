@@ -421,6 +421,61 @@
   justify-self: end;
 }
 
+.routeState {
+  display: grid;
+  max-width: 44rem;
+  gap: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  padding: 2rem;
+}
+
+.routeState h1,
+.routeState p {
+  margin: 0;
+}
+
+.routeState > a,
+.stateActions a {
+  color: var(--color-action);
+  font-weight: 700;
+}
+
+.stateActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skeletonGrid span {
+  min-height: 10rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(100deg, var(--color-neutral-bg), #fff, var(--color-neutral-bg));
+}
+
+.detailAside h2,
+.detailAside p {
+  margin: 0;
+}
+
+.detailAside {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.detailAside code {
+  justify-self: start;
+  padding: 0.5rem;
+}
+
 @media (max-width: 48rem) {
   .filters,
   .grid,
