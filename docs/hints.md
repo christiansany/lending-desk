@@ -28,7 +28,8 @@ Reveal one hint at a time.
 2. Next.js discovers `loading.tsx`, `not-found.tsx`, and `error.tsx` by location.
 3. In `error.tsx`, call both `reset()` and `router.refresh()` so retry clears
    the boundary and requests a fresh server render. Keep a return path in
-   `not-found.tsx`.
+   `not-found.tsx`. The `force-error` trigger is permanent, so confirm the new
+   request in Network even though it deliberately fails again.
 
 ## Exercise 5
 
