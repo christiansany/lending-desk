@@ -117,7 +117,8 @@ do not replace its architecture with a new stack.
 
 - User-visible constraint: preserve a complete interaction-heavy CSR comparison.
 - Strategy: client rendering is intentional on this control route.
-- Evidence: response HTML contains the shell, then `/api/items` supplies the list.
+- Evidence: response HTML contains the shell, then `/api/items` supplies the list;
+  item links remain under `/csr/items/[id]` and fetch detail in the browser.
 - Freshness owner: the client data hook.
 - Failure owner: the list component with retry and preserved content.
 
