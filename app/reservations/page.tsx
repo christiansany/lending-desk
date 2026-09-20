@@ -12,7 +12,10 @@ export default async function ReservationsPage() {
   return (
     <section>
       <h1>Your reservations</h1>
-      <p>This route depends on the current request and is rendered per user.</p>
+      <p>
+        This workshop route reads request state and uses the seeded current user to simulate a
+        per-user response.
+      </p>
       {reservations.length === 0 ? (
         <p>You have no reservations.</p>
       ) : (
