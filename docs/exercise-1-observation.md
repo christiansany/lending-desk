@@ -23,6 +23,9 @@ npm run build
 npm start
 ```
 
+If port 3000 is occupied, use `npm start -- --port 3001` and replace port 3000
+in the browser and terminal commands for this exercise.
+
 Open <http://localhost:3000> in a clean browser profile. In DevTools, open the
 Network panel, select "Disable cache", and keep the panel recording.
 
