@@ -1,23 +1,31 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { getAvailability, getItem, getReservationCount } from "@/server/data";
 import { ServerItemDetail } from "@/src/features/items/ServerItemDetail";
+import { AvailabilityFact, ReservationFact } from "@/src/features/items/StreamingFacts";
 
 export default async function ItemPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const item = await getItem(id);
+  const itemPromise = getItem(id);
+  const availabilityPromise = getAvailability(id);
+  const reservationsPromise = getReservationCount(id);
+
+  const item = await itemPromise;
   if (!item) notFound();
-
-  const availability = await getAvailability(id);
-  if (!availability) notFound();
-
-  const reservations = await getReservationCount(id);
-  if (!reservations) notFound();
 
   return (
     <ServerItemDetail
       item={item}
-      availability={availability}
-      reservationCount={reservations.count}
+      availability={
+        <Suspense fallback="Checking…">
+          <AvailabilityFact result={availabilityPromise} />
+        </Suspense>
+      }
+      reservations={
+        <Suspense fallback="Counting…">
+          <ReservationFact result={reservationsPromise} />
+        </Suspense>
+      }
     />
   );
 }
