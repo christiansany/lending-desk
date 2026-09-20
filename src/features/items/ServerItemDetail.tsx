@@ -22,9 +22,12 @@ export function ServerItemDetail({
           <div className={styles.itemHeader}>
             <div>
               <p className={styles.eyebrow}>{categoryLabel(item.category)}</p>
-              <h1>{item.name}</h1>
+              <h1 data-stream-marker="item">{item.name}</h1>
             </div>
-            <span className={availability.reserved ? styles.reservedBadge : styles.freeBadge}>
+            <span
+              className={availability.reserved ? styles.reservedBadge : styles.freeBadge}
+              data-stream-marker="availability"
+            >
               {availability.reserved ? "Reserved" : "Free"}
             </span>
           </div>
