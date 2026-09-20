@@ -1,5 +1,3 @@
-"use client";
-
 const CATEGORY_LABELS: Record<string, string> = {
   laptops: "Laptops",
   cameras: "Cameras",

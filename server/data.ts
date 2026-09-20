@@ -26,6 +26,7 @@ export async function getItems(input: ItemSearchInput = {}) {
 
 export async function getItem(id: string) {
   await sleep(350);
+  if (id === "force-error") throw new Error("Intentional workshop detail failure");
   const item = findItem(id);
   return item ? withStatus(item) : null;
 }

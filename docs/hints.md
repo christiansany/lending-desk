@@ -10,9 +10,9 @@ Reveal one hint at a time.
 
 ## Exercise 2
 
-1. Keep the interactive comparison at `/csr`. Change only the data owner of `/`.
+1. Keep the complete interactive app at `/csr`. The new `/` may be read-only.
 2. `server/data.ts` exposes the same list operation without a browser round trip.
-3. Await `getItems` in `app/page.tsx` and pass serializable results to the view.
+3. A small semantic list is enough. Do not rebuild every client interaction.
 
 ## Exercise 3
 
@@ -22,7 +22,7 @@ Reveal one hint at a time.
 
 ## Exercise 4
 
-1. Decide which segment owns loading, expected absence, and unexpected failure.
+1. The starting branch already moves item reads into the route. Add state files.
 2. Next.js discovers `loading.tsx`, `not-found.tsx`, and `error.tsx` by location.
 3. Keep retry in `error.tsx`; keep a return path in `not-found.tsx`.
 
@@ -36,7 +36,7 @@ Reveal one hint at a time.
 
 1. A build symbol is evidence about production output, not a product requirement.
 2. Ask whether the response varies by request, user, or time.
-3. `/imprint` should be static. `/reservations` reads request state and should not.
+3. `/imprint` should be static. `/reservations` simulates a per-user route.
 
 ## Exercise 7
 
