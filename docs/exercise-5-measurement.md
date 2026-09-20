@@ -18,8 +18,11 @@ If the response is not chunked, confirm that the route is dynamic before changin
 Suspense.
 
 ```bash
-curl --trace-time --trace-ascii - -s http://localhost:3000/items/item-001 -o /dev/null 2>&1 | grep "Recv data"
+npm run measure:stream
 ```
+
+The command prints elapsed time for the loading fallback, first useful item,
+availability, and full response. Run it three times for every implementation.
 
 Done when the three promises start before the first await, the item shell has a
 meaningful fallback, and the slow facts no longer block the shell.
