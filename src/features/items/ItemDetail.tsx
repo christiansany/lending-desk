@@ -6,22 +6,14 @@ import {
   useRef,
   useState,
   type Dispatch,
+  type FormEvent,
   type MutableRefObject,
   type SetStateAction,
 } from "react";
 import { categoryLabel, formatDate, formatMoney, formatRange, todayIso } from "@/src/lib/format";
 import { log } from "@/src/lib/log";
 import { requestJson, RequestError, useFetch } from "@/src/lib/useFetch";
-import {
-  Badge,
-  Button,
-  Card,
-  ErrorState,
-  ErrorSummary,
-  Field,
-  Spinner,
-  Status,
-} from "@/src/ui";
+import { Badge, Button, Card, ErrorState, ErrorSummary, Field, Spinner, Status } from "@/src/ui";
 import { isCurrentUser, isItemResponse, isReservation, type CurrentUser, type Item } from "./types";
 import styles from "./items.module.css";
 
@@ -51,7 +43,8 @@ function itemFailureMessage(error: RequestError): string {
   if (error.status === 429) {
     return `Too many requests. Try again${error.retryAfter ? ` in ${error.retryAfter} seconds` : " shortly"}.`;
   }
-  if (error.status === 503) return "This equipment is temporarily unavailable. Please try again shortly.";
+  if (error.status === 503)
+    return "This equipment is temporarily unavailable. Please try again shortly.";
   return "We couldn't load this item. Try again.";
 }
 
@@ -64,7 +57,8 @@ function reservationFailureMessage(error: RequestError): string {
   if (error.status === 429) {
     return `Too many reservation attempts. Try again${error.retryAfter ? ` in ${error.retryAfter} seconds` : " shortly"}.`;
   }
-  if (error.status === 503) return "Reservations are temporarily unavailable. Please try again shortly.";
+  if (error.status === 503)
+    return "Reservations are temporarily unavailable. Please try again shortly.";
   if (error.kind === "timeout" || error.kind === "network") {
     return "We could not confirm whether your reservation was made. Check availability before trying again.";
   }
@@ -86,16 +80,20 @@ function reservationErrors(values: ReservationValues): Record<string, string> {
     errors.email = "Enter a reachable email address.";
   }
   const today = todayIso();
-  if (!values.from || values.from < today) errors.from = "Choose a start date that is not in the past.";
+  if (!values.from || values.from < today)
+    errors.from = "Choose a start date that is not in the past.";
   if (!values.to) errors.to = "Choose an end date.";
   if (values.from && values.to && values.to < values.from) {
     errors.to = "The end date must be on or after the start date.";
   }
   if (values.from && values.to) {
-    const days = (Date.parse(`${values.to}T00:00:00Z`) - Date.parse(`${values.from}T00:00:00Z`)) / 86_400_000 + 1;
+    const days =
+      (Date.parse(`${values.to}T00:00:00Z`) - Date.parse(`${values.from}T00:00:00Z`)) / 86_400_000 +
+      1;
     if (days > 14) errors.to = "A reservation can last at most 14 days.";
   }
-  if (values.purpose.trim().length < 5) errors.purpose = "Tell us in at least 5 characters what you need it for.";
+  if (values.purpose.trim().length < 5)
+    errors.purpose = "Tell us in at least 5 characters what you need it for.";
   return errors;
 }
 
@@ -126,8 +124,13 @@ export function ItemDetail({ itemId }: { itemId: string }) {
     const missing = item.error.status === 404;
     return (
       <section className={styles.state}>
-        <ErrorState title={missing ? "This item is no longer available." : "We couldn't load this item"} requestId={item.error.requestId}>
-          {missing ? "Return to the equipment list to choose another item." : itemFailureMessage(item.error)}
+        <ErrorState
+          title={missing ? "This item is no longer available." : "We couldn't load this item"}
+          requestId={item.error.requestId}
+        >
+          {missing
+            ? "Return to the equipment list to choose another item."
+            : itemFailureMessage(item.error)}
         </ErrorState>
         {missing ? (
           <Link href="/" className={styles.backLink}>
@@ -147,9 +150,11 @@ export function ItemDetail({ itemId }: { itemId: string }) {
   return (
     <div className={styles.page}>
       <Link href="/" className={styles.backLink}>
-        Back to equipment
+        <span aria-hidden="true">‹</span> Back to equipment
       </Link>
-      {item.error && <ErrorState requestId={item.error.requestId}>{itemFailureMessage(item.error)}</ErrorState>}
+      {item.error && (
+        <ErrorState requestId={item.error.requestId}>{itemFailureMessage(item.error)}</ErrorState>
+      )}
       <section className={styles.detailLayout}>
         <Card className={styles.detailCard}>
           <div className={styles.itemHeader}>
@@ -227,7 +232,8 @@ function ReservationForm({
     setValues((current) => ({ ...current, [key]: value }));
   }
 
-  async function reserveItem() {
+  async function reserveItem(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     const localErrors = reservationErrors(values);
     setFocusErrors(true);
     setFormError(null);
@@ -311,7 +317,7 @@ function ReservationForm({
       )}
       {savedRange && <Status className={styles.success}>Reserved for {savedRange}.</Status>}
       <ErrorSummary errors={errors} fieldIds={RESERVATION_FIELD_IDS} focusOnRender={focusErrors} />
-      <form className={styles.form}>
+      <form className={styles.form} noValidate onSubmit={reserveItem}>
         <Field
           id={RESERVATION_FIELD_IDS.name}
           label="Your name"
@@ -366,8 +372,8 @@ function ReservationForm({
           onChange={(event) => setValue("purpose", event.target.value)}
         />
         <div className={styles.formActions}>
-          <Button type="button" loading={saving} disabled={saving} onClick={reserveItem}>
-            Reserve item
+          <Button type="submit" loading={saving} disabled={saving}>
+            {saving ? "Reserving item" : "Reserve item"}
           </Button>
           {saving && <Status>Reserving item...</Status>}
         </div>

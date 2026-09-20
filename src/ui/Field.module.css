@@ -13,15 +13,16 @@
 .input {
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
-  padding: 0.5rem 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.625rem 0.75rem;
   font: inherit;
   font-size: 0.875rem;
   outline: none;
 }
 
-.input:focus {
+.input:focus-visible {
   border-color: var(--color-action);
-  box-shadow: 0 0 0 2px var(--color-neutral-bg);
+  box-shadow: 0 0 0 3px rgb(240 169 52 / 0.28);
 }
 
 .input[aria-invalid="true"] {
@@ -29,7 +30,7 @@
 }
 
 .textarea {
-  min-height: 6rem;
+  min-height: 7rem;
   resize: vertical;
 }
 

@@ -4,14 +4,15 @@ Lending Desk is a brownfield internal equipment-lending application built with
 Next.js 16, React 19, TypeScript, and CSS Modules. Improve the existing system;
 do not replace its architecture with a new stack.
 
-## Course branch
+## SSR and CSR workshop branch
 
-- This branch is the canonical starting point for course evening 2. Do not move
-  evening-2 preparation to `main`; the course still uses `main` for evening 1.
+- This branch is the canonical starting point for the SSR and CSR workshop. Do
+  not move this preparation to `main`; the course still uses `main` for the
+  React and AI session.
 - Preserve the client-rendered list and detail startup path until exercise 1 has
   measured it. UX fixes may change presentation and behavior, but the first
-  response must remain an application shell on `evening2-start`.
-- Derive later exercise branches from `evening2-start` and document the branch
+  response must remain an application shell on `ssr-and-csr`.
+- Derive later exercise branches from `ssr-and-csr` and document the branch
   used by each exercise.
 
 ## Start with the repository
@@ -64,8 +65,8 @@ do not replace its architecture with a new stack.
 
 - Prefer native semantic HTML and existing design-system controls. Each control
   needs an unambiguous visible label; placeholders do not replace labels.
-- Keep one `useState` value per field. Validate in the button action and submit
-  through the button's `onClick`; do not attach `onSubmit` in this application.
+- Keep one `useState` value per field. Submit through the form's `onSubmit` so
+  keyboard submission and native form semantics work as expected.
 - Client checks improve feedback but do not replace the server as the authority.
   Keep submitted values on any failure and surface server 422 field messages at
   their matching controls.

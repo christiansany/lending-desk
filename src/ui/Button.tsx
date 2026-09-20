@@ -26,7 +26,11 @@ export function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <button className={`${styles.button} ${STYLES[variant]} ${className}`} {...rest}>
+    <button
+      className={`${styles.button} ${STYLES[variant]} ${className}`}
+      aria-busy={loading || undefined}
+      {...rest}
+    >
       {loading && <Spinner />}
       {children}
     </button>

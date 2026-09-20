@@ -5,15 +5,15 @@ code in this exercise.
 
 ## Before you start
 
-Confirm that you are on the evening-2 starting point:
+Confirm that you are on the SSR and CSR workshop starting point:
 
 ```bash
 git branch --show-current
 ```
 
-Your local branch should be `workshop/evening2-e1`, created from
-`course/evening2-start`. Do not use `main`; the course keeps that branch for
-evening 1.
+Your local branch should be `workshop/ssr-and-csr`, created from
+`course/ssr-and-csr`. Do not use `main`; the course keeps that branch for the
+React and AI session.
 
 Run the production application:
 

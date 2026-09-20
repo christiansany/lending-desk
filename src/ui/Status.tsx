@@ -5,7 +5,7 @@ import styles from "./Status.module.css";
 
 export function Status({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <span className={`${styles.status} ${className}`} aria-live="polite">
+    <span className={`${styles.status} ${className}`} role="status">
       {children}
     </span>
   );

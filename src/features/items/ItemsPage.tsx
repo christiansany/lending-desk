@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState, type FormEvent } from "react";
 import { categoryLabel, formatDate, formatMoney } from "@/src/lib/format";
 import { log } from "@/src/lib/log";
 import { requestJson, RequestError, useFetch } from "@/src/lib/useFetch";
@@ -135,17 +135,33 @@ export function ItemsPage() {
   }, [items.error]);
 
   const resetPage = () => setPage(1);
+  const clearFilters = () => {
+    setSearch("");
+    setStatus("all");
+    setOwner("all");
+    setCategory("");
+    resetPage();
+  };
   const hasFilters = Boolean(search || category || status !== "all" || owner !== "all");
   const initialError = items.error && items.data === null ? items.error : null;
+  const resultSummary = items.data
+    ? `${items.data.total} ${items.data.total === 1 ? "item" : "items"}`
+    : "Equipment results";
 
   return (
     <div className={styles.page}>
       <header className={styles.heading}>
         <div>
-          <h1>Equipment</h1>
-          <p>Find equipment to borrow or offer something from your own kit.</p>
+          <p className={styles.eyebrow}>Equipment library</p>
+          <h1>Borrow what you need</h1>
+          <p>Search equipment shared by colleagues, then reserve it for up to 14 days.</p>
         </div>
-        <Button type="button" onClick={() => setOfferOpen((open) => !open)}>
+        <Button
+          type="button"
+          aria-expanded={offerOpen}
+          aria-controls="offer-item-panel"
+          onClick={() => setOfferOpen((open) => !open)}
+        >
           {offerOpen ? "Close offer form" : "Offer an item"}
         </Button>
       </header>
@@ -160,52 +176,66 @@ export function ItemsPage() {
         />
       )}
 
-      <Card className={styles.filters}>
-        <Field
-          label="Search equipment"
-          value={search}
-          placeholder="Name, description, serial, or owner"
-          onChange={(event) => {
-            setSearch(event.target.value);
-            resetPage();
-          }}
-        />
-        <Select
-          label="Reservation status"
-          value={status}
-          options={[
-            { value: "all", label: "All items" },
-            { value: "free", label: "Free" },
-            { value: "reserved", label: "Reserved" },
-          ]}
-          onChange={(event) => {
-            setStatus(event.target.value);
-            resetPage();
-          }}
-        />
-        <Select
-          label="Owner"
-          value={owner}
-          options={[
-            { value: "all", label: "All owners" },
-            { value: "me", label: "Mine" },
-            { value: "others", label: "Others" },
-          ]}
-          onChange={(event) => {
-            setOwner(event.target.value);
-            resetPage();
-          }}
-        />
-        <Select
-          label="Category"
-          value={category}
-          options={CATEGORY_OPTIONS}
-          onChange={(event) => {
-            setCategory(event.target.value);
-            resetPage();
-          }}
-        />
-      </Card>
+      <section className={styles.filterPanel} aria-labelledby="filter-heading">
+        <div className={styles.filterHeading}>
+          <div>
+            <h2 id="filter-heading">Find equipment</h2>
+            <p>Results update as you search or filter.</p>
+          </div>
+          {hasFilters && (
+            <Button type="button" variant="ghost" onClick={clearFilters}>
+              Clear all
+            </Button>
+          )}
+        </div>
+        <div className={styles.filters}>
+          <Field
+            label="Search"
+            value={search}
+            placeholder="Try ‘camera’, an owner, or a serial number"
+            className={styles.searchInput}
+            onChange={(event) => {
+              setSearch(event.target.value);
+              resetPage();
+            }}
+          />
+          <Select
+            label="Availability"
+            value={status}
+            options={[
+              { value: "all", label: "Any availability" },
+              { value: "free", label: "Available now" },
+              { value: "reserved", label: "Currently reserved" },
+            ]}
+            onChange={(event) => {
+              setStatus(event.target.value);
+              resetPage();
+            }}
+          />
+          <Select
+            label="Owner"
+            value={owner}
+            options={[
+              { value: "all", label: "Anyone" },
+              { value: "me", label: "My equipment" },
+              { value: "others", label: "Other colleagues" },
+            ]}
+            onChange={(event) => {
+              setOwner(event.target.value);
+              resetPage();
+            }}
+          />
+          <Select
+            label="Category"
+            value={category}
+            options={CATEGORY_OPTIONS}
+            onChange={(event) => {
+              setCategory(event.target.value);
+              resetPage();
+            }}
+          />
+        </div>
+      </section>
 
       {items.isInitialLoading && (
         <div className={styles.loading}>
@@ -227,9 +257,7 @@ export function ItemsPage() {
       {items.data && (
         <section className={styles.results}>
           <div className={styles.resultsHeader}>
-            <p>
-              {items.data.total} {items.data.total === 1 ? "item" : "items"} found
-            </p>
+            <h2>{resultSummary}</h2>
             {items.isRefreshing && <Status>Updating results...</Status>}
           </div>
           {items.error && (
@@ -250,17 +278,7 @@ export function ItemsPage() {
                   : "No equipment has been offered yet. Offer an item to get started."}
               </p>
               {hasFilters ? (
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => {
-                    setSearch("");
-                    setStatus("all");
-                    setOwner("all");
-                    setCategory("");
-                    resetPage();
-                  }}
-                >
+                <Button type="button" variant="secondary" onClick={clearFilters}>
                   Clear filters
                 </Button>
               ) : (
@@ -292,6 +310,10 @@ export function ItemsPage() {
                           <dd>{item.mine ? "You" : item.ownerName}</dd>
                         </div>
                         <div>
+                          <dt>Collection</dt>
+                          <dd>{item.location}</dd>
+                        </div>
+                        <div>
                           <dt>Rate</dt>
                           <dd>{formatMoney(item.dailyRate)} per day</dd>
                         </div>
@@ -302,6 +324,7 @@ export function ItemsPage() {
                           </div>
                         )}
                       </dl>
+                      <span className={styles.viewDetails}>View details</span>
                     </Card>
                   </Link>
                 ))}
@@ -331,7 +354,8 @@ function OfferItemForm({ onComplete }: { onComplete: () => void }) {
     setValues((current) => ({ ...current, [key]: value }));
   }
 
-  async function offerItem() {
+  async function offerItem(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     const localErrors = offerErrors(values);
     setFocusErrors(true);
     setFormError(null);
@@ -386,7 +410,7 @@ function OfferItemForm({ onComplete }: { onComplete: () => void }) {
   }
 
   return (
-    <Card className={styles.formCard}>
+    <Card id="offer-item-panel" className={styles.formCard}>
       <div className={styles.formHeading}>
         <h2>Offer an item</h2>
         <p>Share equipment that colleagues can borrow.</p>
@@ -397,7 +421,7 @@ function OfferItemForm({ onComplete }: { onComplete: () => void }) {
         </ErrorState>
       )}
       <ErrorSummary errors={errors} fieldIds={OFFER_FIELD_IDS} focusOnRender={focusErrors} />
-      <form className={styles.form}>
+      <form className={styles.form} noValidate onSubmit={offerItem}>
         <Field
           id={OFFER_FIELD_IDS.name}
           label="Item name"
@@ -461,8 +485,8 @@ function OfferItemForm({ onComplete }: { onComplete: () => void }) {
           onChange={(event) => setValue("dailyRate", event.target.value)}
         />
         <div className={styles.formActions}>
-          <Button type="button" loading={saving} disabled={saving} onClick={offerItem}>
-            Offer item
+          <Button type="submit" loading={saving} disabled={saving}>
+            {saving ? "Offering item" : "Offer item"}
           </Button>
           {saving && <Status>Offering item...</Status>}
         </div>

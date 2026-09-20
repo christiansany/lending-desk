@@ -20,8 +20,8 @@ export function ErrorSummary({ errors, fieldIds, focusOnRender = false }: ErrorS
   if (entries.length === 0) return null;
 
   return (
-    <div ref={summaryRef} className={styles.summary} tabIndex={-1}>
-      <strong>Please correct the highlighted fields.</strong>
+    <div ref={summaryRef} className={styles.summary} tabIndex={-1} role="alert">
+      <strong>There is a problem</strong>
       <ul>
         {entries.map(([field, message]) => (
           <li key={field}>
