@@ -121,6 +121,18 @@ do not replace its architecture with a new stack.
 - Freshness owner: the client data hook.
 - Failure owner: the list component with retry and preserved content.
 
+### `/items/[id]`
+
+- User-visible wait: item identity should arrive before the slower availability
+  and reservation facts.
+- Strategy: request-time server rendering with streamed facts and a client
+  reservation form.
+- Evidence: the item arrives near 350 ms, the independent facts near 650 and
+  900 ms, and the reservation form remains interactive after hydration.
+- Freshness owner: the server detail reads; the client refreshes them after a
+  successful reservation.
+- Failure owner: the item route boundary for reads and the form for mutations.
+
 ### `/reservations`
 
 - User-visible constraint: results differ by the current request and user.
