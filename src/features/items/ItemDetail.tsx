@@ -98,7 +98,7 @@ function reservationErrors(values: ReservationValues): Record<string, string> {
   return errors;
 }
 
-export function ItemDetail({ itemId }: { itemId: string }) {
+export function ItemDetail({ itemId, backHref = "/" }: { itemId: string; backHref?: string }) {
   const item = useFetch(`/api/items/${encodeURIComponent(itemId)}`, isItemResponse);
 
   useEffect(() => {
@@ -150,7 +150,7 @@ export function ItemDetail({ itemId }: { itemId: string }) {
 
   return (
     <div className={styles.page}>
-      <Link href="/" className={styles.backLink}>
+      <Link href={backHref} className={styles.backLink}>
         <span aria-hidden="true">‹</span> Back to equipment
       </Link>
       {item.error && (
