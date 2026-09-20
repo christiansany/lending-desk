@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getAvailability, getItem, getReservationCount } from "@/server/data";
 import { ServerItemDetail } from "@/src/features/items/ServerItemDetail";
+import { ReservationPanel } from "@/src/features/items/ItemDetail";
 import { AvailabilityFact, ReservationFact } from "@/src/features/items/StreamingFacts";
 
 export default async function ItemPage({ params }: { params: Promise<{ id: string }> }) {
@@ -26,6 +27,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
           <ReservationFact result={reservationsPromise} />
         </Suspense>
       }
+      reservationPanel={<ReservationPanel item={item} />}
     />
   );
 }

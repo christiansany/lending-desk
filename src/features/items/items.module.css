@@ -471,6 +471,11 @@
   gap: 0.75rem;
 }
 
+.detailRail {
+  display: grid;
+  gap: 1rem;
+}
+
 .detailAside code {
   justify-self: start;
   padding: 0.5rem;

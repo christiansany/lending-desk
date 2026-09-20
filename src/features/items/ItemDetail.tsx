@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   useEffect,
   useRef,
@@ -200,6 +201,11 @@ export function ItemDetail({ itemId }: { itemId: string }) {
       </section>
     </div>
   );
+}
+
+export function ReservationPanel({ item }: { item: Item }) {
+  const router = useRouter();
+  return <ReservationForm item={item} onReservationCreated={() => router.refresh()} />;
 }
 
 function ReservationForm({

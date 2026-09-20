@@ -102,3 +102,29 @@ do not replace its architecture with a new stack.
   client TypeScript. Report commands that could not be run and why.
 - Review the changed user flow at narrow viewport width and keyboard-only
   navigation when UI behavior, states, or forms change.
+
+## Rendering strategy
+
+### `/`
+
+- User-visible wait: the catalogue should be useful in the first response.
+- Strategy: request-time server rendering, with filter state in the URL.
+- Evidence: a known item appears in response HTML and the build marks the route `ƒ`.
+- Freshness owner: the server list operation.
+- Failure owner: the route error boundary.
+
+### `/csr`
+
+- User-visible constraint: preserve a complete interaction-heavy CSR comparison.
+- Strategy: client rendering is intentional on this control route.
+- Evidence: response HTML contains the shell, then `/api/items` supplies the list.
+- Freshness owner: the client data hook.
+- Failure owner: the list component with retry and preserved content.
+
+### `/reservations`
+
+- User-visible constraint: results differ by the current request and user.
+- Strategy: request-time rendering. The workshop uses a seeded user as an auth stand-in.
+- Evidence: `cookies()` makes the request dependency explicit and the build marks `ƒ`.
+- Freshness owner: the request-time server read.
+- Failure owner: the route boundary.

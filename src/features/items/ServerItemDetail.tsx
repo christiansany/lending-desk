@@ -8,10 +8,12 @@ export function ServerItemDetail({
   item,
   availability,
   reservations,
+  reservationPanel,
 }: {
   item: Item;
   availability: ReactNode;
   reservations: ReactNode;
+  reservationPanel?: ReactNode;
 }) {
   return (
     <div className={styles.page}>
@@ -61,12 +63,15 @@ export function ServerItemDetail({
             </div>
           </dl>
         </article>
-        <aside className={`${styles.serverCard} ${styles.detailAside}`}>
-          <p className={styles.eyebrow}>Workshop measurement</p>
-          <h2>Independent work starts together</h2>
-          <p>The shell can arrive while slower facts continue behind their own boundaries.</p>
-          <code>max(350, 650, 900) ms</code>
-        </aside>
+        <div className={styles.detailRail}>
+          {reservationPanel}
+          <aside className={`${styles.serverCard} ${styles.detailAside}`}>
+            <p className={styles.eyebrow}>Workshop measurement</p>
+            <h2>Independent work starts together</h2>
+            <p>The shell can arrive while slower facts continue behind their own boundaries.</p>
+            <code>max(350, 650, 900) ms</code>
+          </aside>
+        </div>
       </section>
     </div>
   );
