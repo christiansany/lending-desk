@@ -4,6 +4,16 @@ Lending Desk is a brownfield internal equipment-lending application built with
 Next.js 16, React 19, TypeScript, and CSS Modules. Improve the existing system;
 do not replace its architecture with a new stack.
 
+## Course branch
+
+- This branch is the canonical starting point for course evening 2. Do not move
+  evening-2 preparation to `main`; the course still uses `main` for evening 1.
+- Preserve the client-rendered list and detail startup path until exercise 1 has
+  measured it. UX fixes may change presentation and behavior, but the first
+  response must remain an application shell on `evening2-start`.
+- Derive later exercise branches from `evening2-start` and document the branch
+  used by each exercise.
+
 ## Start with the repository
 
 - Read the affected feature, its shared dependencies, and [docs/api.md](docs/api.md)
