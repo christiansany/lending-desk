@@ -15,6 +15,21 @@ npm run dev          # http://localhost:3000
 
 Node 24 or newer.
 
+## SSR and CSR workshop
+
+The workshop does not start from the default branch. Fetch the course remote
+and create your local branch from `course/ssr-and-csr`:
+
+```bash
+git fetch course
+git switch --create workshop/ssr-and-csr course/ssr-and-csr
+```
+
+Prepared recovery points are named `ssr-and-csr-e2` through
+`ssr-and-csr-e6`. The reference result is `ssr-and-csr-solution`. The baseline
+keeps the equipment list client-rendered so exercise 1 can measure that design
+before changing it.
+
 ## What is where
 
 | Path            | Contents                                                                             |

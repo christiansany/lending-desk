@@ -35,6 +35,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/" className={styles.navLink}>
                 Equipment
               </Link>
+              <Link href="/reservations" className={styles.navLink}>
+                Reservations
+              </Link>
             </nav>
           </div>
         </header>

@@ -77,6 +77,11 @@
   font-weight: 600;
 }
 
+.header nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
 .navLink:hover {
   background: var(--color-neutral-bg);
   color: var(--color-text);
