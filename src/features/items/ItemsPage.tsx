@@ -104,7 +104,7 @@ function offerErrors(values: OfferValues): Record<string, string> {
   return errors;
 }
 
-export function ItemsPage() {
+export function ItemsPage({ detailBasePath = "/items" }: { detailBasePath?: string } = {}) {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
   const [owner, setOwner] = useState("all");
@@ -291,7 +291,7 @@ export function ItemsPage() {
             <>
               <div className={styles.grid}>
                 {items.data.items.map((item) => (
-                  <Link key={item.id} href={`/items/${item.id}`} className={styles.itemLink}>
+                  <Link key={item.id} href={`${detailBasePath}/${item.id}`} className={styles.itemLink}>
                     <Card className={styles.itemCard}>
                       <div className={styles.itemHeader}>
                         <h2>{item.name}</h2>
