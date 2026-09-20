@@ -12,7 +12,15 @@ export interface ServerItemFilters {
   page: number;
 }
 
-export function ServerItemsPage({ data, filters }: { data: ItemList; filters: ServerItemFilters }) {
+export function ServerItemsPage({
+  data,
+  filters,
+  renderedAt,
+}: {
+  data: ItemList;
+  filters: ServerItemFilters;
+  renderedAt: string;
+}) {
   return (
     <div className={styles.page}>
       <header className={styles.heading}>
@@ -77,7 +85,7 @@ export function ServerItemsPage({ data, filters }: { data: ItemList; filters: Se
             {data.total} {data.total === 1 ? "item" : "items"}
           </h2>
           <p className={styles.renderedAt}>
-            Rendered at <RenderedAt />
+            Rendered at <RenderedAt value={renderedAt} />
           </p>
         </div>
         {data.items.length === 0 ? (

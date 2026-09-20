@@ -1,5 +1,5 @@
 "use client";
 
-export function RenderedAt() {
-  return <time dateTime={new Date().toISOString()}>{new Date().toISOString()}</time>;
+export function RenderedAt({ value }: { value: string }) {
+  return <time dateTime={value}>{value}</time>;
 }

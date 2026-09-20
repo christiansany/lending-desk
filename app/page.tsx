@@ -13,7 +13,7 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
     page: positiveInteger(scalar(input.page)),
   };
   const data = await getItems({ ...filters, page: String(filters.page) });
-  return <ServerItemsPage data={data} filters={filters} />;
+  return <ServerItemsPage data={data} filters={filters} renderedAt={new Date().toISOString()} />;
 }
 
 function scalar(value: string | string[] | undefined): string {
