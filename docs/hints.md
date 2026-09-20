@@ -25,6 +25,8 @@ Reveal one hint at a time.
 
 1. The starting branch already moves item reads into the route. Add state files,
    not another data layer.
+   Use `/?q=force-error` for the catalogue boundary and `/items/force-error`
+   for the detail boundary.
 2. Next.js discovers `loading.tsx`, `not-found.tsx`, and `error.tsx` by location.
 3. In `error.tsx`, call both `reset()` and `router.refresh()` so retry clears
    the boundary and requests a fresh server render. Keep a return path in
@@ -35,7 +37,8 @@ Reveal one hint at a time.
 
 1. Independent promises do not need independent start times.
 2. Start all three operations before awaiting the item.
-3. Put slow facts in async children behind separate Suspense boundaries.
+3. Put slow facts in async children behind separate Suspense boundaries. Run
+   `npm run measure:stream` after every rebuild.
 
 ## Exercise 6
 
