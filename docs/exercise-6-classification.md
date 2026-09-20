@@ -10,6 +10,7 @@ last column with evidence from the route's data and user needs.
 | `/items/[id]` | item plus live availability | | | |
 | `/reservations` | current user's data | | | |
 | `/csr` | explicit client-rendered comparison | | | |
+| `/csr/items/[id]` | dynamic path with client-fetched detail | | | |
 
 The build symbol describes what Next.js produced, not whether the choice is good.
 Your decision must name the wait or constraint it addresses.
