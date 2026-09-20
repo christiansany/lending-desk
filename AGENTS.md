@@ -14,6 +14,10 @@ do not replace its architecture with a new stack.
   response must remain an application shell on `ssr-and-csr`.
 - Derive later exercise branches from `ssr-and-csr` and document the branch
   used by each exercise.
+- The prepared branch sequence is `ssr-and-csr-e2` through
+  `ssr-and-csr-e6`, followed by `ssr-and-csr-solution`. Each branch is the
+  starting point named by the matching exercise, not a replacement for the
+  baseline.
 
 ## Start with the repository
 
