@@ -21,6 +21,9 @@ export async function getItems(input: ItemSearchInput = {}) {
   };
   const matches = matchItems(query);
   await sleep(searchLatencyMs(matches.length));
+  if (query.q === "force-error") {
+    throw new Error("Intentional workshop catalogue failure");
+  }
   return paginate(matches, query);
 }
 
