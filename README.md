@@ -27,16 +27,6 @@ Node 24 or newer.
 | `docs/api.md`   | The API, with example payloads                                                       |
 | `tests/`        | Tests for the API (`npm test`)                                                       |
 
-## AI-assisted work
-
-Repository guidance for GitHub Copilot and compatible agents starts in
-[AGENTS.md](AGENTS.md). GitHub Copilot loads concise repository and
-path-specific instructions from [`.github/`](.github/); specialized workflows
-for resilient UI, accessible forms, client observability, and reviews are in
-[`.github/skills/`](.github/skills/). The project safety hook blocks only
-obviously destructive shell commands and is supported by Copilot CLI and the
-cloud agent.
-
 ## Notes
 
 - The data lives **in memory** and is seeded on every server start: 47 items, five owners, three
